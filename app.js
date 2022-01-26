@@ -52,5 +52,5 @@ app.post("/", (req, res) => {
 });
 
 app.use("*", (req, res) => {
-  res.send("baba, you are lost");
+  res.send("Baba, you are lost");
 });
