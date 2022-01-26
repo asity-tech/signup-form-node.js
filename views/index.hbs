@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Saira:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+      rel="stylesheet"
+    />
+    <title>asity</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Saira;
+      }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+      }
+      div {
+        width: 50vh;
+        display: flex;
+        justify-content: space-between;
+      }
+      input {
+        width: 60%;
+        border: 1px solid gray;
+        border-radius: 0;
+        background: none;
+        outline: none;
+        padding: 0.6rem 1rem;
+        margin-bottom: 1rem;
+      }
+
+      input[type="submit"] {
+        border: none;
+        background: dodgerblue;
+        width: 100%;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="post">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" />
+      </div>
+      <div>
+        <label for="org">Organization</label>
+        <input type="text" id="org" name="org" />
+      </div>
+      <input type="submit" value="Push" />
+    </form>
+  </body>
+</html>
