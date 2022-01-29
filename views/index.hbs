@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,48 +9,27 @@
     />
     <title>asity</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        font-family: Saira;
-      }
-      body {
-        min-height: 100vh;
-        display: grid;
-        place-content: center;
-      }
-      div {
-        width: 50vh;
-        display: flex;
-        justify-content: space-between;
-      }
-      input {
-        width: 60%;
-        border: 1px solid gray;
-        border-radius: 0;
-        background: none;
-        outline: none;
-        padding: 0.6rem 1rem;
-        margin-bottom: 1rem;
-      }
-
-      input[type="submit"] {
-        border: none;
-        background: dodgerblue;
-        width: 100%;
-        color: white;
-      }
+      * { margin: 0; padding: 0; font-family: Saira; } body { min-height: 100vh;
+      display: grid; place-content: center; } div { width: 50vh; display: flex;
+      justify-content: space-between; } input { width: 60%; border: 1px solid
+      gray; border-radius: 0; background: none; outline: none; padding: 0.6rem
+      1rem; margin-bottom: 1rem; } input[type="submit"] { border: none;
+      background: dodgerblue; width: 100%; color: white; }
     </style>
   </head>
   <body>
     <form method="post">
       <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" />
+        <label for="name">Username</label>
+        <input type="text" id="name" name="name" required />
       </div>
       <div>
-        <label for="org">Organization</label>
-        <input type="text" id="org" name="org" />
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
       </div>
       <input type="submit" value="Push" />
     </form>

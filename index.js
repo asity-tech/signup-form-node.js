@@ -2,6 +2,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+require("dotenv").config();
+var port = process.env.PORT;
 
 // this is for the body parser i.e req.body
 app.use(express.urlencoded({ extended: "true" }));
@@ -10,8 +12,9 @@ app.set("view engine", "hbs");
 
 // defining the schema & modal
 const devSchema = new mongoose.Schema({
-  name: String,
-  org: String,
+  username: String,
+  email: String,
+  password: String,
 });
 
 const Dev = mongoose.model("Dev", devSchema);
@@ -20,8 +23,8 @@ const Dev = mongoose.model("Dev", devSchema);
 mongoose.connect("mongodb://localhost:27017/asity").then(
   () => {
     console.log("Connected to DB!");
-    app.listen(3000, () => {
-      console.log("Server started on port 3000");
+    app.listen(port, () => {
+      console.log(`Server started on port ${port}`);
     });
   },
   (err) => {
@@ -52,5 +55,5 @@ app.post("/", (req, res) => {
 });
 
 app.use("*", (req, res) => {
-  res.send("baba, you are lost");
+  res.send("Baba, you are lost");
 });
