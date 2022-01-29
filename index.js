@@ -2,20 +2,34 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const { check, validationResult } = require("express-validator");
 require("dotenv").config();
-var port = process.env.PORT;
+var port = process.env.PORT || 3000;
 
 // this is for the body parser i.e req.body
 app.use(express.urlencoded({ extended: "true" }));
-
 app.set("view engine", "hbs");
 
 // defining the schema & modal
 const devSchema = new mongoose.Schema({
-  username: String,
+  username: {
+    type: String,
+  },
   email: String,
   password: String,
 });
+
+// DB VALIDATION
+// const devSchema = new mongoose.Schema({
+//   username: {
+//     type: String,
+//     lowercase: true,
+//     minlength: [4, "Username must be at least 4 characters"],
+//     maxlength: [12, "Username must be less than 12 characters"],
+//   },
+//   email: String,
+//   password: String,
+// });
 
 const Dev = mongoose.model("Dev", devSchema);
 
@@ -38,22 +52,43 @@ app.get("/", (req, res) => {
 });
 
 // route for the form
-app.post("/", (req, res) => {
-  console.log(req.body);
-  const devData = new Dev({
-    name: req.body.name,
-    org: req.body.org,
-  });
-  devData
-    .save()
-    .then(() => {
-      res.send("Wallah, Baba check your console & db collection");
-    })
-    .catch((err) => {
-      res.send("Baba, we've some error for you", err);
+app.post(
+  "/",
+  [
+    check(
+      "username",
+      "Really, what kind of username name is this, it must be >= 3 char"
+    ).isLength({
+      min: 3,
+    }),
+    check("email", "BDW your email format is bullshit").isEmail(),
+    check("password", "Password must be in 5 char bro").isLength({ min: 5 }),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    console.log(
+      `Data you've entered - `,
+      req.body,
+      `, Errors on you face - `,
+      errors.mapped()
+    );
+    const devData = new Dev({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     });
-});
+    devData
+      .save()
+      .then(() => {
+        errors.mapped();
+        res.send(`Wallah, Baba check your console & db collection`);
+      })
+      .catch((err) => {
+        res.send(`Baba, we've some error for you - ${err.message}`);
+      });
+  }
+);
 
 app.use("*", (req, res) => {
-  res.send("Baba, you are lost");
+  res.send(`Baba, you are lost`);
 });
