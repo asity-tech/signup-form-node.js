@@ -17,6 +17,7 @@ const devSchema = new mongoose.Schema({
   },
   email: String,
   password: String,
+  state: String,
 });
 
 // DB VALIDATION
@@ -76,6 +77,7 @@ app.post(
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
+      state: req.body.state,
     });
     devData
       .save()
