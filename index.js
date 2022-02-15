@@ -51,6 +51,12 @@ mongoose.connect("mongodb://localhost:27017/asity").then(
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/success", (req, res) => {
+  res.render("success");
+});
+app.get("/error", (req, res) => {
+  res.render("error");
+});
 
 // route for the form
 app.post(
@@ -83,10 +89,12 @@ app.post(
       .save()
       .then(() => {
         errors.mapped();
-        res.send(`Wallah, Baba check your console & db collection`);
+        res.render("success");
+        // res.send(`Wallah, Bro check your console & db collection`);
       })
       .catch((err) => {
-        res.send(`Baba, we've some error for you - ${err.message}`);
+        res.render("error");
+        // res.send(`Uff, we've some error for you - ${err.message}`);
       });
   }
 );
